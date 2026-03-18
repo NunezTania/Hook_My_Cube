@@ -34,7 +34,6 @@ var target_force: float = 10 # balanced
 
 func _ready() -> void:
 	health_bar = $HealthBar
-	animation = $Pigeon2/AnimationPlayer
 	super._ready()
 	
 	if is_in_lobby:

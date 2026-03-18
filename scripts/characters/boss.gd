@@ -35,7 +35,6 @@ func _ready() -> void:
 	health_component.speed = health_component._max_speed
 	damage = 15
 	damage_type = Enums.DamageType.NORMAL # TODO: when water type is added: change this to water damage type
-	$AnimationPlayer.play("idle")
 	
 	attack_cd = 2.0
 	id = -1
@@ -110,7 +109,7 @@ func _physics_process(delta: float) -> void:
 			is_attacking = true
 			current_cd = 0.0
 			attack_cd = randf_range(0.5, 3.0)
-			$AnimationPlayer.play("attack")
+			$MushroomKing2/AnimationPlayer.play("Weapon")
 			if randf() < 0.2:
 				_spawn_boid()
 		
@@ -142,7 +141,7 @@ func _spawn_boid() -> void:
 func _attack_end() -> void:
 	can_rotate = true
 	is_attacking = false
-	$AnimationPlayer.play("idle")
+	$MushroomKing2/AnimationPlayer.play("Idle")
 
 func _attack_callibrate() -> void:
 	can_rotate = false
@@ -173,10 +172,7 @@ func _on_knock_back_area_area_entered(_area: Area3D) -> void:
 func _on_knock_back_area_area_exited(_area: Area3D) -> void:
 	on_knockback_area = false
 
-
 func _death_sequence() -> void:
-	# TODO: death animations
-	
-	is_dead.emit(id) # notify the death (need an id to emit, but isn't used for bosses)
-	
-	queue_free()
+	$MushroomKing2/AnimationPlayer.play("Death")
+	await $MushroomKing2/AnimationPlayer.animation_finished
+	super._death_sequence()

@@ -1,36 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://tnoxj6xhwxrt"]
+[gd_scene format=3 uid="uid://tnoxj6xhwxrt"]
 
 [ext_resource type="Script" uid="uid://cj658akbttwcm" path="res://scripts/decorations/loot_orbe.gd" id="1_wsuyk"]
 [ext_resource type="Script" uid="uid://duqdm15li6un3" path="res://scripts/interactions/interactionsDetector.gd" id="2_4abix"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pim4r"]
-transparency = 1
-depth_draw_mode = 1
-albedo_color = Color(0.807843, 0.537255, 0.25098, 0.596078)
-metallic = 0.25
-roughness = 0.1
-emission_enabled = true
-emission = Color(0.807843, 0.537255, 0.25098, 1)
-emission_energy_multiplier = 1.3
-
-[sub_resource type="SphereMesh" id="SphereMesh_wsuyk"]
-material = SubResource("StandardMaterial3D_pim4r")
+[ext_resource type="PackedScene" uid="uid://vud8qdfv5bjt" path="res://texture/Loots/BinbunVFX/loot_effects/effects/ground/ground_loot_vfx_legendary.tscn" id="2_483wl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4abix"]
 size = Vector3(7.37225, 3.52454, 6.55702)
 
-[node name="LootOrbe" type="Node3D"]
+[node name="LootOrbe" type="Node3D" unique_id=77679328]
 script = ExtResource("1_wsuyk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_wsuyk")
+[node name="GroundLootVFX_Legendary" parent="." unique_id=46334286 instance=ExtResource("2_483wl")]
+transform = Transform3D(2.505, 0, 0, 0, 2.505, 0, 0, 0, 2.505, 0, 0, 0)
 
-[node name="InteractionsDetector" type="Area3D" parent="."]
+[node name="InteractionsDetector" type="Area3D" parent="." unique_id=1451116996]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22375, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("2_4abix")
 metadata/_custom_type_script = "uid://duqdm15li6un3"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionsDetector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionsDetector" unique_id=1758744950]
 shape = SubResource("BoxShape3D_4abix")

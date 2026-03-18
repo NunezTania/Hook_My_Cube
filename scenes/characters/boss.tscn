@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dd2lchxcdgs6m"]
+[gd_scene format=3 uid="uid://dd2lchxcdgs6m"]
 
 [ext_resource type="Script" uid="uid://disolp4bnher6" path="res://scripts/characters/boss.gd" id="1_imw47"]
-[ext_resource type="PackedScene" uid="uid://dnbcx272f5ff4" path="res://addons/octopus_tentacle/scene.gltf" id="2_edpq3"]
+[ext_resource type="PackedScene" uid="uid://bp35l8y85b8o2" path="res://texture/Ultimate Monsters/Big/glTF/MushroomKing.gltf" id="2_r8uym"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="3_r8uym"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_edpq3"]
@@ -23,240 +23,9 @@ radius = 1.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j30ar"]
 height = 2.5
 
-[sub_resource type="Animation" id="Animation_r8uym"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerListener:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerListener:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sketchfab_Scene:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 9.53674e-07)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sketchfab_Scene:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("KnockBackArea:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("KnockBackArea:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_p2gyk"]
-resource_name = "attack"
-length = 4.0
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [],
-"method": &"_attack_callibrate"
-}, {
-"args": [],
-"method": &"_attack_touch_ground"
-}, {
-"args": [],
-"method": &"_attack_end"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerListener:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.1, 1.19, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.99, 3.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 10, 0), Vector3(0, 6.16131, 6.7768), Vector3(0, 0.746733, 9.19211), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(0, 0.747, 9.192), Vector3(0, 10, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerListener:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.01, 1.99, 3.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.907152, 0, 0), Vector3(1.65806, 0, 0), Vector3(1.65806, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sketchfab_Scene:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.1, 1.19, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.99, 3.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 10, 0), Vector3(0, 6.16131, 6.7768), Vector3(0, 0.746733, 9.19211), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(0, 0.747, 9.192), Vector3(0, 10, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sketchfab_Scene:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.01, 1.99, 3.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.907152, 0, 0), Vector3(1.65806, 0, 0), Vector3(1.65806, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("KnockBackArea:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.1, 1.19, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.99, 3.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 10, 0), Vector3(0, 6.16131, 6.7768), Vector3(0, 0.746733, 9.19211), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(-0.1, 0.747, 9.192), Vector3(0.1, 0.747, 9.192), Vector3(0, 0.747, 9.192), Vector3(0, 10, 0)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("KnockBackArea:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.01, 1.99, 3.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.907152, 0, 0), Vector3(1.65806, 0, 0), Vector3(1.65806, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_edpq3"]
-resource_name = "idle"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sketchfab_Scene:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.00999999, 1.01, 1.97667, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sketchfab_Scene:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 1.96667, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.282743), Vector3(0, 0, 0), Vector3(0, 0, 0.298451), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerListener:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.00999999, 1.01, 1.97667, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0), Vector3(0, 10, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerListener:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1, 1.96667, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.282743), Vector3(0, 0, 0), Vector3(0, 0, 0.298451), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxcvo"]
-_data = {
-&"RESET": SubResource("Animation_r8uym"),
-&"attack": SubResource("Animation_p2gyk"),
-&"idle": SubResource("Animation_edpq3")
-}
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qryem"]
 height = 20.0
-radius = 3.0
+radius = 5.325
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6mvt"]
 
@@ -278,71 +47,66 @@ resource_local_to_scene = true
 material = ExtResource("3_r8uym")
 size = Vector2(10, 0.7)
 
-[node name="Boss" type="CharacterBody3D"]
+[node name="Boss" type="CharacterBody3D" unique_id=1062472445]
 collision_layer = 0
 script = ExtResource("1_imw47")
 metadata/_custom_type_script = "uid://cicq1c5bduuou"
 
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_edpq3")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 9.53674e-07)
+[node name="MushroomKing2" parent="." unique_id=1853352681 instance=ExtResource("2_r8uym")]
+transform = Transform3D(2.905, 0, 0, 0, 2.905, 0, 0, 0, 2.905, 0, 0, 0)
 
-[node name="PlayerListener" type="Area3D" parent="."]
+[node name="PlayerListener" type="Area3D" parent="." unique_id=208160884]
 collision_layer = 5
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerListener"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerListener" unique_id=1168494718]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
 shape = SubResource("CylinderShape3D_edpq3")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerListener"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerListener" unique_id=792882529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 shape = SubResource("CylinderShape3D_r8uym")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="PlayerListener"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="PlayerListener" unique_id=1075284316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_p2gyk")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="PlayerListener"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="PlayerListener" unique_id=746476328]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 shape = SubResource("CylinderShape3D_hxcvo")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="PlayerListener"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="PlayerListener" unique_id=717582306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.75, 0)
 shape = SubResource("CylinderShape3D_j30ar")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hxcvo")
-}
-
-[node name="KnockBackArea" type="Area3D" parent="."]
+[node name="KnockBackArea" type="Area3D" parent="." unique_id=1302919016]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KnockBackArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KnockBackArea" unique_id=813420416]
 shape = SubResource("CylinderShape3D_qryem")
 
-[node name="Eye" type="MeshInstance3D" parent="."]
+[node name="Eye" type="MeshInstance3D" parent="." unique_id=1175927961]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.171618, 18.571, 0.441664)
 visible = false
 mesh = SubResource("SphereMesh_edpq3")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Eye"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Eye" unique_id=2030663246]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.102719)
 mesh = SubResource("SphereMesh_r8uym")
 
-[node name="Eye2" type="MeshInstance3D" parent="."]
+[node name="Eye2" type="MeshInstance3D" parent="." unique_id=111399153]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153504, 18.571, 0.441664)
 visible = false
 mesh = SubResource("SphereMesh_edpq3")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Eye2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Eye2" unique_id=745437774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.102719)
 mesh = SubResource("SphereMesh_r8uym")
 
-[node name="HealthBar" type="MeshInstance3D" parent="."]
+[node name="HealthBar" type="MeshInstance3D" parent="." unique_id=1598500359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 mesh = SubResource("QuadMesh_p2gyk")
 skeleton = NodePath("")
@@ -350,5 +114,3 @@ skeleton = NodePath("")
 [connection signal="area_entered" from="PlayerListener" to="." method="_on_player_listener_area_entered"]
 [connection signal="area_entered" from="KnockBackArea" to="." method="_on_knock_back_area_area_entered"]
 [connection signal="area_exited" from="KnockBackArea" to="." method="_on_knock_back_area_area_exited"]
-
-[editable path="Sketchfab_Scene"]

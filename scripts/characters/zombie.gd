@@ -13,7 +13,6 @@ var burn_shader_mat: ShaderMaterial
 
 func _ready() -> void:
 	health_bar = $HealthBar
-	animation = $Orc2/AnimationPlayer
 	super._ready()
 	
 	if is_in_lobby:

@@ -1,31 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://xs0xup8v57yj"]
+[gd_scene format=3 uid="uid://xs0xup8v57yj"]
 
 [ext_resource type="Script" uid="uid://b6jyca1r4ehlg" path="res://scripts/decorations/essence.gd" id="1_ngaev"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pydp"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_ngaev"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_4pydp")
-radius = 0.1
-height = 0.2
+[ext_resource type="PackedScene" uid="uid://j8jcv62x4u5a" path="res://texture/Loots/BinbunVFX/loot_effects/effects/ground/ground_loot_vfx_epic.tscn" id="2_k12lw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hc06d"]
 height = 5.0
 radius = 5.0
 
-[node name="Essence" type="Node3D"]
+[node name="Essence" type="Node3D" unique_id=1606789900]
 script = ExtResource("1_ngaev")
 metadata/_custom_type_script = "uid://c40yxgjle2l7x"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_ngaev")
+[node name="GroundLootVFX_Epic" parent="." unique_id=699928612 instance=ExtResource("2_k12lw")]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1547678831]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=718052702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("CylinderShape3D_hc06d")
 
