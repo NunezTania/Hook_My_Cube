@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://y1yw5naea0tu"]
+[gd_scene format=3 uid="uid://y1yw5naea0tu"]
 
 [ext_resource type="Script" uid="uid://cp0j2ml3yhrbt" path="res://scripts/characters/player.gd" id="1_yewv4"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="3_6eyoc"]
@@ -25,65 +25,65 @@ size = Vector2(1, 0.01)
 radius = 0.6
 height = 2.2
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1851726822 groups=["Player"]]
 collision_layer = 32770
 script = ExtResource("1_yewv4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1203458260]
 mesh = SubResource("CapsuleMesh_3vyb7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=239045413]
 shape = SubResource("CapsuleShape3D_g2els")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=1528203619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.782, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1099644346]
 
-[node name="HealthBar" type="MeshInstance3D" parent="Head"]
+[node name="HealthBar" type="MeshInstance3D" parent="Head" unique_id=1692347393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.548, -0.749)
 mesh = SubResource("QuadMesh_eojnx")
 
-[node name="RayCast3D" type="RayCast3D" parent="Head"]
+[node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=1242060578]
 target_position = Vector3(0, 0, -100)
 collide_with_areas = true
 debug_shape_custom_color = Color(0, 1, 0, 1)
 debug_shape_thickness = 1
 
-[node name="Marker3D" type="Marker3D" parent="Head/RayCast3D"]
+[node name="Marker3D" type="Marker3D" parent="Head/RayCast3D" unique_id=1387779647]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 
-[node name="PlayerArea3D" type="Area3D" parent="."]
+[node name="PlayerArea3D" type="Area3D" parent="." unique_id=1754383587]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea3D" unique_id=1304668275]
 shape = SubResource("CapsuleShape3D_yewv4")
 debug_color = Color(0.78148, 0.41709, 0.350172, 0.42)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1455668348]
 
-[node name="DEBUG_INFOS" parent="CanvasLayer" instance=ExtResource("3_76oj4")]
+[node name="DEBUG_INFOS" parent="CanvasLayer" unique_id=1035277123 instance=ExtResource("3_76oj4")]
 mouse_filter = 1
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource("4_dyp2m")]
+[node name="UI" parent="CanvasLayer" unique_id=337904972 instance=ExtResource("4_dyp2m")]
 
-[node name="UpgradeMenu" parent="CanvasLayer" instance=ExtResource("6_kqtwu")]
+[node name="UpgradeMenu" parent="CanvasLayer" unique_id=2144701567 instance=ExtResource("6_kqtwu")]
 visible = false
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_atpat")]
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1541841513 instance=ExtResource("5_atpat")]
 visible = false
 
-[node name="GrapplinPosition" type="Marker3D" parent="."]
+[node name="GrapplinPosition" type="Marker3D" parent="." unique_id=1385564685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.35, -1.5)
 
-[node name="Elbow" type="Marker3D" parent="."]
+[node name="Elbow" type="Marker3D" parent="." unique_id=124853059]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.651, 0.282, -0.733)
 
-[node name="RuneSpot" type="Marker3D" parent="."]
+[node name="RuneSpot" type="Marker3D" parent="." unique_id=353025059]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.35, -1.5)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=366394304]
 light_energy = 5.0
 omni_range = 10.0
 omni_shadow_mode = 0
