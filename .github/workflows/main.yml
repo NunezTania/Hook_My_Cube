@@ -226,9 +226,6 @@ jobs:
   release:
     needs: [version, build-linux, build-windows, build-macos, build-linux-arm64]
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'push' && github.ref == 'refs/heads/main' ||
-      github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/test'
     steps:
       - uses: actions/checkout@v3
         with:
