@@ -22,7 +22,7 @@ func _ready() -> void:
 	$TimeToLive.timeout.connect(_on_time_to_live_timeout)
 	$TimeToLive.wait_time = 5
 	$TimeToLive.start()
-	linear_velocity = Vector3(1, 1, 1)
+	
 	interaction_area.area_entered.connect(_on_interaction_area_area_entered)
 	interaction_area.body_entered.connect(_on_interaction_area_body_entered)
 

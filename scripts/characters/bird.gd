@@ -39,12 +39,12 @@ func _ready() -> void:
 	if is_in_lobby:
 		health_component._health_regen_per_sec = 0.5
 	
-	health_component._max_health = 10
+	health_component._max_health = 5
 	health_component.health = health_component._max_health
 	health_component._max_speed = speed
 	health_component.speed = health_component._max_speed
-	
 	health_component.damage_taken.connect(_damage_taken)
+	
 	burn_shader_mat = burn_effect.mesh.material
 	
 	ray_cast.collide_with_areas = false
@@ -67,7 +67,6 @@ func _physics_process(delta: float) -> void:
 	
 	#if id == 1:
 		#return
-		
 	delta_last_tick += delta
 
 	var _direction = Vector3()
@@ -167,11 +166,6 @@ func _physics_process(delta: float) -> void:
 	_direction = to_global(ray_cast.target_position) - global_position
 
 	position += _direction.normalized() * delta * (health_component.speed if not target else health_component.speed * 1.3)
-	if (!$Pigeon2/AnimationPlayer.is_playing()):
-		if (velocity.is_zero_approx()):
-			$Pigeon2/AnimationPlayer.play("Flying_Idle")
-		else:
-			$Pigeon2/AnimationPlayer.play("Fast_Flying")
 
 
 func set_boids(boids: Array) -> void:
@@ -189,9 +183,7 @@ func set_spawner(manager: Spawner) -> void:
 	spawner = manager
 
 func _damage_taken() -> void:
-	$Pigeon2/AnimationPlayer.play("HitReact")
 	if spawner: spawner._bird_taking_damage(id)
-	super._damage_taken()
 
 func set_target(new_target: Creature) -> void:
 	#print(id, " Bird::set_target: ", new_target, ", id: ", new_target.id)
@@ -225,19 +217,6 @@ func remove_creature_to_listen(old_target: Creature) -> void:
 	if old_target.health_component.damage_taken.is_connected(potential_target_take_damage):
 		old_target.health_component.damage_taken.disconnect(potential_target_take_damage)
 
-func _on_damage_taken():
-	$Pigeon2/AnimationPlayer.play("HitReact")
-	super._on_damage_taken()
-	
-func _death_sequence():
-	$Pigeon2/AnimationPlayer.play("Death")
-	await $Pigeon2/AnimationPlayer.animation_finished
-	super._death_sequence()
-
-func _death_sequence_summoned():
-	$Pigeon2/AnimationPlayer.play("Death")
-	await $Pigeon2/AnimationPlayer.animation_finished
-	super._death_sequence_summoned()
 
 func _compute_new_target_position(i: int, max_i: int) -> Vector3:
 	var angle: float = 3*PI / max_i

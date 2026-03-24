@@ -57,6 +57,7 @@ func _on_heal_taken() -> void:
 func _update_life_display_custom(health_ratio: float) -> void:
 	health_bar.mesh.size.x = health_bar_max_ratio * health_ratio
 
+
 func _lobby_damage_taken():
 	if health_component.health <= 0:
 		print(self, " is dead ! Regeneration activated !!! health: ", health_component.health, " -> ", health_component.get_max_health())

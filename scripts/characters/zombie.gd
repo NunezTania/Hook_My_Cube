@@ -21,8 +21,7 @@ func _ready() -> void:
 	health_component._armor = 0.0
 	health_component._penetration_resistance = 0.0
 	health_component._max_speed = SPEED
-	health_component.speed = SPEED
-	health_component.damage_taken.connect(_damage_taken)
+	health_component.speed = SPEED 
 	
 	burn_shader_mat = burn_effect.mesh.material
 	
@@ -53,12 +52,6 @@ func _physics_process(delta: float) -> void:
 		#base_position = null
 		velocity.y += prev_gravity  * delta * 4
 	
-	if (!$Orc2/AnimationPlayer.is_playing()):
-		if (velocity.is_zero_approx()):
-			$Orc2/AnimationPlayer.play("Idle")
-		else:
-			$Orc2/AnimationPlayer.play("Run")
-	
 	move_and_slide()
 
 func _on_burn_effect():
@@ -81,21 +74,6 @@ func apply_visual_burn_effect(duration: float) -> void:
 	burn_applied -= 1
 	if burn_applied <= 0:
 		burn_effect.visible = false
-
-func _damage_taken():
-	$Orc2/AnimationPlayer.play("HitReact")
-	super._damage_taken()
-
-func _death_sequence():
-	$Orc2/AnimationPlayer.play("Death")
-	await $Orc2/AnimationPlayer.animation_finished
-	super._death_sequence()
-
-
-func _death_sequence_summoned():
-	$Orc2/AnimationPlayer.play("Death")
-	await $Orc2/AnimationPlayer.animation_finished
-	super._death_sequence_summoned()
 
 func set_mob_data(human_seed: String, difficulty: int, depth_ratio: float) -> void:
 	super.set_mob_data(human_seed, difficulty, depth_ratio)
@@ -157,8 +135,10 @@ func _on_attack_area_area_exited(_area: Area3D) -> void:
 func try_attack() -> void:
 	if player_at_range and !is_attacking:
 		is_attacking = true
-		$Orc2/AnimationPlayer.play("Punch")
-		end_attack()
+		$AnimationPlayer.play("attack")
+
+func recover_after_attack() -> void:
+	$AnimationPlayer.play("recover")
 
 func end_attack() -> void:
 	is_attacking = false

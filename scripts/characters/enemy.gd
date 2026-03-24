@@ -10,8 +10,6 @@ var armor_pen: float = 0
 var attack_cd: float = 5.0
 var current_cd: float = 0.0
 
-var animation: AnimationPlayer
-
 const XP_ORBE = preload("res://scenes/decorations/xp.tscn")
 const GOLD_ORBE = preload("res://scenes/decorations/gold.tscn")
 const ESSENCE_ORBE = preload("res://scenes/decorations/essence.tscn")
@@ -39,7 +37,7 @@ func _ready() -> void:
 	super._ready()
 	layer = 4
 
-func _damage_taken():
+func _on_damage_taken():
 	super._on_damage_taken()
 	
 	if damage_area and health_component.health > 0:
@@ -75,6 +73,8 @@ func set_mob_data(human_seed: String, difficulty: int, depth_ratio: float) -> vo
 
 
 func _death_sequence() -> void:
+	# TODO: animations
+	
 	var xp_orbe = XP_ORBE.instantiate()
 	xp_orbe.set_amount(xp)
 	xp_orbe.position = global_position

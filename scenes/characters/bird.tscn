@@ -1,8 +1,7 @@
-[gd_scene format=3 uid="uid://drnl2ytrefjba"]
+[gd_scene load_steps=21 format=3 uid="uid://drnl2ytrefjba"]
 
 [ext_resource type="Script" uid="uid://fqro76tg5qme" path="res://scripts/characters/bird.gd" id="1_2sltb"]
 [ext_resource type="Material" uid="uid://cluaqb8rwmdm8" path="res://materials/shaders/bird_on_fire.tres" id="2_41i38"]
-[ext_resource type="PackedScene" uid="uid://duw1m5mrypjtg" path="res://texture/Ultimate Monsters/Flying/glTF/Pigeon.gltf" id="2_aoeho"]
 [ext_resource type="Material" uid="uid://dtrgxefu8yt4f" path="res://materials/creatures/bird_default.tres" id="2_dwjge"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="5_aoeho"]
 
@@ -46,8 +45,9 @@ material = SubResource("StandardMaterial3D_45abh")
 radius = 0.05
 height = 0.1
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_h0u2q"]
-radius = 0.89
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qw46i"]
+radius = 0.25
+height = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_142vc"]
 radius = 14.0
@@ -74,118 +74,101 @@ resource_local_to_scene = true
 material = ExtResource("5_aoeho")
 size = Vector2(0.5, 0.08)
 
-[node name="Bird" type="CharacterBody3D" unique_id=885702700]
+[node name="Bird" type="CharacterBody3D"]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_2sltb")
 
-[node name="Pigeon2" parent="." unique_id=484457301 instance=ExtResource("2_aoeho")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="RayCasts" type="Node3D" parent="."]
 
-[node name="Skeleton3D" parent="Pigeon2/CharacterArmature" parent_id_path=PackedInt32Array(484457301, 1066055200) index="0" unique_id=373092133]
-bones/1/rotation = Quaternion(-0.014627182, -0.0009377924, 0.003287558, 0.99988717)
-bones/2/rotation = Quaternion(0.23638542, 0.00018450998, -0.0034135177, 0.97165334)
-bones/3/rotation = Quaternion(0.57166564, -0.0002264342, -0.00015693657, 0.82048666)
-bones/4/rotation = Quaternion(-0.2630977, 0.19185117, -0.55176425, 0.7678079)
-bones/5/rotation = Quaternion(0.09973208, -0.69557804, -0.12116162, 0.7011024)
-bones/6/rotation = Quaternion(0.0757426, -0.0022282132, 0.036572892, 0.996454)
-bones/8/rotation = Quaternion(-0.26326, -0.18861084, 0.5472431, 0.7717805)
-bones/9/rotation = Quaternion(0.09973204, 0.6955781, 0.121161625, 0.70110244)
-bones/10/rotation = Quaternion(0.075742714, 0.0022281818, -0.036572855, 0.996454)
-bones/12/rotation = Quaternion(0.9996196, -0.012443872, -0.008295722, -0.02317337)
+[node name="Meshes" type="Node3D" parent="."]
 
-[node name="RayCasts" type="Node3D" parent="." unique_id=1976541292]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12, 0)
-
-[node name="Meshes" type="Node3D" parent="." unique_id=415197857]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.75, 0)
-
-[node name="Body" type="MeshInstance3D" parent="Meshes" unique_id=1104053026]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 0)
+[node name="Body" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_142vc")
 skeleton = NodePath("../..")
 
-[node name="Effect" type="MeshInstance3D" parent="Meshes" unique_id=1000642832]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 0)
+[node name="Effect" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("CylinderMesh_dwjge")
 skeleton = NodePath("../..")
 
-[node name="Eye" type="MeshInstance3D" parent="Meshes" unique_id=1921204043]
-transform = Transform3D(1, 0, 0, 0, 0.983105, 0.183042, 0, -0.183042, 0.983105, -0.0781064, 0.75, 0.127509)
+[node name="Eye" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 0.983105, 0.183042, 0, -0.183042, 0.983105, -0.0781064, 0.0884753, 0.127509)
 mesh = SubResource("SphereMesh_aoeho")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Eye" unique_id=1560309735]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Eye"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00806913, 0.0451619)
 mesh = SubResource("SphereMesh_dwjge")
 
-[node name="Eye2" type="MeshInstance3D" parent="Meshes" unique_id=361503394]
-transform = Transform3D(1, 0, 0, 0, 0.983105, 0.183042, 0, -0.183042, 0.983105, 0.0690332, 0.75, 0.127509)
+[node name="Eye2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 0.983105, 0.183042, 0, -0.183042, 0.983105, 0.0690332, 0.0884753, 0.127509)
 mesh = SubResource("SphereMesh_h0u2q")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Eye2" unique_id=1823043624]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Eye2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00489735, 0.0460033)
 mesh = SubResource("SphereMesh_dwjge")
 
-[node name="Body" type="Area3D" parent="." unique_id=1949073808]
+[node name="Body" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 6
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=1569340036]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.125, 0)
-shape = SubResource("SphereShape3D_h0u2q")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0970857)
+shape = SubResource("CapsuleShape3D_qw46i")
 
-[node name="CohesionVision" type="Area3D" parent="." unique_id=1407876282]
+[node name="CohesionVision" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CohesionVision" unique_id=1845592996]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CohesionVision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.57741)
 shape = SubResource("SphereShape3D_142vc")
 debug_color = Color(0.335968, 0.613757, 0.298564, 0.42)
 
-[node name="AvoidanceVision" type="Area3D" parent="." unique_id=1799499092]
+[node name="AvoidanceVision" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AvoidanceVision" unique_id=109604199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AvoidanceVision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 shape = SubResource("SphereShape3D_aoeho")
 debug_color = Color(0.971789, 0.130081, 0.275074, 0.42)
 
-[node name="Front" type="Marker3D" parent="." unique_id=910580669]
+[node name="Front" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="Right" type="Marker3D" parent="." unique_id=1010761997]
+[node name="Right" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
-[node name="TypeVisualIndicator" type="MeshInstance3D" parent="." unique_id=1952437468]
-transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, -0.26, 1.57, 0)
+[node name="TypeVisualIndicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.189691)
 mesh = SubResource("SphereMesh_142vc")
 skeleton = NodePath("../Front")
 
-[node name="CreatureDetection" type="Area3D" parent="." unique_id=1722169979]
+[node name="CreatureDetection" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 6
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CreatureDetection" unique_id=354655303]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CreatureDetection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 shape = SubResource("SphereShape3D_dwjge")
 debug_color = Color(0.734033, 0.461491, 0.259143, 0.42)
 
-[node name="PlayerDetection" type="Area3D" parent="." unique_id=1234587163]
+[node name="PlayerDetection" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection" unique_id=2112021571]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 shape = SubResource("SphereShape3D_45abh")
 debug_color = Color(0.733333, 0.462745, 0.258824, 0.419608)
 
-[node name="HealthBar" type="MeshInstance3D" parent="." unique_id=1828515221]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56, 0)
+[node name="HealthBar" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.340195, 0)
 mesh = SubResource("QuadMesh_45abh")
 skeleton = NodePath("")
 
@@ -198,5 +181,3 @@ skeleton = NodePath("")
 [connection signal="area_exited" from="CreatureDetection" to="." method="_on_creature_detection_area_exited"]
 [connection signal="area_entered" from="PlayerDetection" to="." method="_on_player_detection_area_entered"]
 [connection signal="area_exited" from="PlayerDetection" to="." method="_on_player_detection_area_exited"]
-
-[editable path="Pigeon2"]

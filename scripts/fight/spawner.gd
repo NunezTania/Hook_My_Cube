@@ -182,6 +182,8 @@ func _unregister_creature(creature: Creature, bird_id: int) -> void:
 func _nothing(_creature: Creature, _bird_id: int) -> void:
 	pass
 
+
+
 func _on_mob_death(mob_id: int) -> void:
 	#if mob_id in current_mobs: # psi, no sense... current_mod not an int array
 		#current_mobs.erase(mob_id)
