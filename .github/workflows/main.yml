@@ -118,39 +118,33 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Prepare Godot ARM64 Binary
+      - name: Install Godot & Templates
         run: |
-          # Download the ARM64 version manually
+          # 1. Download and setup the Godot Binary
           curl -L https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip -o godot.zip
           unzip godot.zip
-          # Create a directory and move the binary into it
-          mkdir -p ./godot-bin
-          mv Godot_v4.4.1-stable_linux.arm64 ./godot-bin/godot
-          chmod +x ./godot-bin/godot
+          mv Godot_v4.4.1-stable_linux.arm64 godot
+          chmod +x godot
 
-      - name: Export Linux ARM64 build
-        uses: firebelley/godot-export@v7.0.0
-        with:
-          # Provide the URL here to stop the 'Invalid host name' error
-          # Even though we use a custom binary, the action needs this string to pass validation
-          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
-          relative_project_path: ./
-          relative_export_path: build/linux-arm64
-          export_preset_name: "Linux ARM64"
-          # These two flags tell the action: "Don't use what you downloaded, use THIS instead"
-          use_custom_godot_executable: true
-          custom_godot_executable_path: ./godot-bin/godot
-          export_debug: true
-          verbose: true
+          # 2. Download and setup Export Templates
+          curl -L https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz -o templates.zip
+          unzip templates.zip
+
+          # 3. Move templates to the location Godot expects
+          mkdir -p ~/.local/share/godot/export_templates/4.4.1.stable
+          mv templates/* ~/.local/share/godot/export_templates/4.4.1.stable/
+
+      - name: Export Game
+        run: |
+          mkdir -p build/linux-arm64
+          # Run Godot in headless mode to export the "Linux ARM64" preset
+          ./godot --headless --export-debug "Linux ARM64" build/linux-arm64/your-game-binary-name
 
       - name: Zip Linux ARM64
         run: |
           mkdir -p artifacts
-          # Double check your Export Preset name in Godot matches this folder exactly
-          pushd build/linux-arm64/"Linux ARM64" || exit 1
-          zip -r ../../../artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip ./*
-          popd
+          cd build/linux-arm64
+          zip -r ../../artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip .
 
       - name: Upload Linux ARM64 artifact
         uses: actions/upload-artifact@v4
