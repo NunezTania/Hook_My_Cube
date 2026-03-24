@@ -118,12 +118,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # 1. Manually download and unzip the Godot binary
-      - name: Download Godot ARM64 Executable
+      - name: Prepare Godot ARM64 Binary
         run: |
+          # Download the ARM64 version manually
           curl -L https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip -o godot.zip
           unzip godot.zip
-          # Move it to a known directory to satisfy the 'scandir' logic
+          # Create a directory and move the binary into it
           mkdir -p ./godot-bin
           mv Godot_v4.4.1-stable_linux.arm64 ./godot-bin/godot
           chmod +x ./godot-bin/godot
@@ -131,13 +131,14 @@ jobs:
       - name: Export Linux ARM64 build
         uses: firebelley/godot-export@v7.0.0
         with:
-          # 2. Point to the templates, but leave executable URL empty
+          # Provide the URL here to stop the 'Invalid host name' error
+          # Even though we use a custom binary, the action needs this string to pass validation
+          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip
           godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
-          # 3. Use the local path we just created
           relative_project_path: ./
           relative_export_path: build/linux-arm64
           export_preset_name: "Linux ARM64"
-          # Force the action to find our manual binary
+          # These two flags tell the action: "Don't use what you downloaded, use THIS instead"
           use_custom_godot_executable: true
           custom_godot_executable_path: ./godot-bin/godot
           export_debug: true
@@ -146,7 +147,7 @@ jobs:
       - name: Zip Linux ARM64
         run: |
           mkdir -p artifacts
-          # Note: Ensure "Linux ARM64" matches your preset name folder exactly
+          # Double check your Export Preset name in Godot matches this folder exactly
           pushd build/linux-arm64/"Linux ARM64" || exit 1
           zip -r ../../../artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip ./*
           popd
@@ -230,7 +231,7 @@ jobs:
           path: artifacts/macos-${{ needs.version.outputs.new_version }}.zip
 
   release:
-    needs: [version, build-linux, build-windows, build-macos]
+    needs: [version, build-linux, build-windows, build-macos, build-linux-arm64]
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'push' && github.ref == 'refs/heads/main' ||
@@ -244,6 +245,12 @@ jobs:
         uses: actions/download-artifact@v4
         with: 
           name: linux-${{ needs.version.outputs.new_version }}
+          path: release/linux
+          
+      - name: Download Linux ARM64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-arm64-${{ needs.version.outputs.new_version }}
           path: release/linux
 
       - name: Download Windows artifact
