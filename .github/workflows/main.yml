@@ -112,40 +112,38 @@ jobs:
           path: artifacts/linux-${{ needs.version.outputs.new_version }}.zip
 
 
-  build-demo:
+  build-linux-arm64:
     needs: [ version, prepare-artifacts ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Export Linux build (DEBUG mode)
+
+      - name: Export Linux ARM64 build
         uses: firebelley/godot-export@v7.0.0
         with:
+          # 1. Use the ARM64 specific Godot executable
           godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip
           godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
           relative_project_path: ./
-          relative_export_path: build/linux
-          export_preset_name: "Linux"
+          relative_export_path: build/linux-arm64
+          # 2. Ensure this matches a preset in your Godot project (see below)
+          export_preset_name: "Linux ARM64"
           export_debug: true
           verbose: true
 
-      - name: Show build/linux contents (debug)
-        run: |
-          echo "Contents of build/linux:"
-          ls -la build/linux || true
-          find build/linux -maxdepth 2 -type f -print || true
-
-      - name: Zip Linux (only build/linux content)
+      - name: Zip Linux ARM64
         run: |
           mkdir -p artifacts
-          pushd build/linux/Linux || exit 1
-          zip -r ../../../artifacts/linux-${{ needs.version.outputs.new_version }}.zip ./*
+          # 3. Adjust path to match the relative_export_path and preset name
+          pushd build/linux-arm64/"Linux ARM64" || exit 1
+          zip -r ../../../artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip ./*
           popd
 
-      - name: Upload Linux artifact
+      - name: Upload Linux ARM64 artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-${{ needs.version.outputs.new_version }}
-          path: artifacts/linux-${{ needs.version.outputs.new_version }}.zip
+          name: linux-arm64-${{ needs.version.outputs.new_version }}
+          path: artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip
 
   build-windows:
     needs: [version, prepare-artifacts]
