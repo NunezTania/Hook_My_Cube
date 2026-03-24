@@ -118,23 +118,35 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # 1. Manually download and unzip the Godot binary
+      - name: Download Godot ARM64 Executable
+        run: |
+          curl -L https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip -o godot.zip
+          unzip godot.zip
+          # Move it to a known directory to satisfy the 'scandir' logic
+          mkdir -p ./godot-bin
+          mv Godot_v4.4.1-stable_linux.arm64 ./godot-bin/godot
+          chmod +x ./godot-bin/godot
+
       - name: Export Linux ARM64 build
         uses: firebelley/godot-export@v7.0.0
         with:
-          # Keep the x86_64 executable because the GitHub Runner is x86_64
-          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm64.zip
+          # 2. Point to the templates, but leave executable URL empty
           godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
+          # 3. Use the local path we just created
           relative_project_path: ./
           relative_export_path: build/linux-arm64
-          # This preset must be configured in Godot to use the ARM64 architecture
           export_preset_name: "Linux ARM64"
+          # Force the action to find our manual binary
+          use_custom_godot_executable: true
+          custom_godot_executable_path: ./godot-bin/godot
           export_debug: true
           verbose: true
 
       - name: Zip Linux ARM64
         run: |
           mkdir -p artifacts
-          # 3. Adjust path to match the relative_export_path and preset name
+          # Note: Ensure "Linux ARM64" matches your preset name folder exactly
           pushd build/linux-arm64/"Linux ARM64" || exit 1
           zip -r ../../../artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip ./*
           popd
@@ -144,7 +156,7 @@ jobs:
         with:
           name: linux-arm64-${{ needs.version.outputs.new_version }}
           path: artifacts/linux-arm64-${{ needs.version.outputs.new_version }}.zip
-
+          
   build-windows:
     needs: [version, prepare-artifacts]
     runs-on: ubuntu-latest
