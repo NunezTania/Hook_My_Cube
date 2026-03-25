@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bualks0wajs8i"]
 
 [ext_resource type="Script" uid="uid://veoyspye5l5q" path="res://scripts/characters/zombie.gd" id="1_fulqv"]
-[ext_resource type="PackedScene" uid="uid://cjxy6r7aq8k64" path="res://texture/Ultimate Monsters/Big/glTF/Orc.gltf" id="2_c44uy"]
+[ext_resource type="PackedScene" uid="uid://b51mirwwf7n3f" path="res://texture/Ultimate Monsters/Big/glTF/Orc.gltf" id="2_c44uy"]
 [ext_resource type="Material" uid="uid://pcviwwdbpg5g" path="res://materials/shaders/zombie_on_fire.tres" id="2_u6mvt"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="4_c44uy"]
 
@@ -55,7 +55,7 @@ id = 1
 [node name="Orc2" parent="." unique_id=232208046 instance=ExtResource("2_c44uy")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.29, 0)
 
-[node name="Skeleton3D" parent="Orc2/CharacterArmature" parent_id_path=PackedInt32Array(232208046, 1665363027) index="0" unique_id=588838782]
+[node name="Skeleton3D" parent="Orc2/CharacterArmature" parent_id_path=PackedInt32Array(232208046, 966503978) index="0" unique_id=1004631989]
 bones/1/rotation = Quaternion(1.167467e-05, 0.70580643, 0.70840484, 1.2000977e-05)
 bones/2/rotation = Quaternion(-3.5526934e-15, 1.1920933e-07, -8.470341e-22, 1)
 bones/4/rotation = Quaternion(0.16683151, 4.3189968e-07, 1.0312022e-07, 0.9859854)

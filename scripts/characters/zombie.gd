@@ -57,6 +57,12 @@ func _physics_process(delta: float) -> void:
 	
 	if player_at_range:
 		velocity = Vector3()
+		
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta * 4
+		#base_position = null
+		velocity.y += prev_gravity  * delta * 4
 	
 	if (!is_creature_dead() && can_run()):
 		if (velocity.is_zero_approx()):
