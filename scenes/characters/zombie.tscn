@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bualks0wajs8i"]
 
 [ext_resource type="Script" uid="uid://veoyspye5l5q" path="res://scripts/characters/zombie.gd" id="1_fulqv"]
-[ext_resource type="PackedScene" uid="uid://b51mirwwf7n3f" path="res://texture/Ultimate Monsters/Big/glTF/Orc.gltf" id="2_c44uy"]
+[ext_resource type="PackedScene" uid="uid://cjxy6r7aq8k64" path="res://texture/Ultimate Monsters/Big/glTF/Orc.gltf" id="2_c44uy"]
 [ext_resource type="Material" uid="uid://pcviwwdbpg5g" path="res://materials/shaders/zombie_on_fire.tres" id="2_u6mvt"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="4_c44uy"]
 
@@ -17,8 +17,8 @@ albedo_color = Color(0.121569, 0.564706, 0.188235, 1)
 material = SubResource("StandardMaterial3D_uql5s")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f2e6v"]
-radius = 0.4
-height = 1.8
+radius = 0.515
+height = 1.815
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fulqv"]
 height = 4.37866
@@ -53,23 +53,21 @@ script = ExtResource("1_fulqv")
 id = 1
 
 [node name="Orc2" parent="." unique_id=232208046 instance=ExtResource("2_c44uy")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.22, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.29, 0)
 
-[node name="Skeleton3D" parent="Orc2/CharacterArmature" parent_id_path=PackedInt32Array(232208046, 1320114061) index="0" unique_id=1622472737]
-bones/1/position = Vector3(0.35192138, 0.097249776, 0.13488266)
-bones/1/rotation = Quaternion(6.4207134e-06, 0.99605215, 0.088771105, 1.1525743e-05)
-bones/2/position = Vector3(0.0021534327, 0.4684866, -0.7840081)
-bones/2/rotation = Quaternion(-0.71388865, 8.34774e-08, -4.2551076e-07, 0.70025927)
-bones/4/rotation = Quaternion(0.1668315, 4.3189968e-07, 1.03120215e-07, 0.98598546)
-bones/5/rotation = Quaternion(-0.03488925, -8.3046365e-07, -6.856183e-09, 0.99939126)
-bones/6/rotation = Quaternion(0.20388533, 1.0190973e-06, 8.795001e-08, 0.97899485)
-bones/7/rotation = Quaternion(-0.31019068, -0.00026222732, 8.5107094e-05, 0.95067436)
+[node name="Skeleton3D" parent="Orc2/CharacterArmature" parent_id_path=PackedInt32Array(232208046, 1665363027) index="0" unique_id=588838782]
+bones/1/rotation = Quaternion(1.167467e-05, 0.70580643, 0.70840484, 1.2000977e-05)
+bones/2/rotation = Quaternion(-3.5526934e-15, 1.1920933e-07, -8.470341e-22, 1)
+bones/4/rotation = Quaternion(0.16683151, 4.3189968e-07, 1.0312022e-07, 0.9859854)
+bones/5/rotation = Quaternion(0.096189596, -8.284732e-07, 2.1512088e-08, 0.99536306)
+bones/6/rotation = Quaternion(0.35192487, 9.693933e-07, 1.5025624e-07, 0.93602824)
+bones/7/rotation = Quaternion(-0.39071867, -0.00025390706, 0.0001072016, 0.9205101)
 bones/8/rotation = Quaternion(-0.13449623, -0.032737724, -0.40912706, 0.90191686)
-bones/9/rotation = Quaternion(0.4660805, 0.8815633, -0.026293673, 0.07017054)
-bones/10/rotation = Quaternion(0.08523976, 0.27824032, -0.20725405, 0.93400335)
+bones/9/rotation = Quaternion(0.4946222, 0.5018446, 0.5071979, -0.496237)
+bones/10/rotation = Quaternion(0.014786743, 0.26712272, -0.17426825, 0.94765896)
 bones/22/rotation = Quaternion(-0.13449597, 0.032738265, 0.4091271, 0.9019169)
-bones/23/rotation = Quaternion(-0.5357007, 0.75910187, 0.08150649, 0.36075753)
-bones/24/rotation = Quaternion(0.08523979, -0.27824032, 0.20725407, 0.93400335)
+bones/23/rotation = Quaternion(-0.49462223, 0.5018445, 0.5071981, 0.49623692)
+bones/24/rotation = Quaternion(0.01478677, -0.26712275, 0.17426829, 0.94765896)
 bones/26/rotation = Quaternion(-0.028374836, 0.0048223785, 0.16748191, 0.9854549)
 bones/27/rotation = Quaternion(-0.10664139, 0.0009219685, -0.008597349, 0.99426)
 bones/29/rotation = Quaternion(-0.11277094, -0.0007699318, -0.014514983, 0.9935147)
@@ -77,15 +75,12 @@ bones/30/rotation = Quaternion(0.020557469, 0.000990947, 0.0012504177, 0.9997874
 bones/32/rotation = Quaternion(0.04225398, -0.02564163, -0.23230451, 0.9713865)
 bones/33/rotation = Quaternion(-0.07661206, 0.0015270507, 0.01986746, 0.9968619)
 bones/35/rotation = Quaternion(-0.01162579, -0.002534516, -0.21219267, 0.9771554)
-bones/36/rotation = Quaternion(0.9918604, 0.010617567, 0.0052866926, -0.12677707)
-bones/37/rotation = Quaternion(-1.8060251e-05, 0.0010111574, 0.010548491, 0.99994385)
-bones/38/rotation = Quaternion(0.99198765, -0.010867791, -0.0030066401, -0.12583044)
-bones/39/rotation = Quaternion(4.7680024e-07, -0.001011353, -0.010548515, 0.99994385)
-bones/40/position = Vector3(0.34848866, 1.3858932, 1.4451972)
+bones/36/rotation = Quaternion(0.9650398, 0.008723388, 0.00209293, 0.26195)
+bones/37/rotation = Quaternion(0.5170168, 0.006319713, 0.008506135, 0.85590965)
+bones/38/rotation = Quaternion(0.9650398, -0.00872351, -0.0020921999, 0.2619499)
+bones/39/rotation = Quaternion(0.51701677, -0.0063197357, -0.00850617, 0.8559097)
 bones/40/rotation = Quaternion(-3.5526934e-15, 1.1920937e-07, -8.470344e-22, 1)
-bones/41/position = Vector3(-0.34929833, 0.09731119, 0.142519)
-bones/41/rotation = Quaternion(-6.5131294e-06, 0.99605215, 0.088770986, -1.10087385e-05)
-bones/42/position = Vector3(-0.34586674, 1.4202594, 0.73038447)
+bones/41/rotation = Quaternion(-1.2077862e-05, 0.70580643, 0.70840484, -1.1664424e-05)
 bones/42/rotation = Quaternion(-3.552734e-15, -5.9604645e-07, 3.3881257e-21, 1)
 
 [node name="EnemyArea3D" type="Area3D" parent="." unique_id=479406453]
@@ -101,6 +96,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_j7qbc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=833735033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 0)
 shape = SubResource("CapsuleShape3D_f2e6v")
 
 [node name="Navigation" type="Node3D" parent="." unique_id=1150032260]
@@ -143,7 +139,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_fyi4w")
 
 [node name="TypeVisualIndicator" type="MeshInstance3D" parent="." unique_id=1059264394]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485, 1.505, 0.355)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41, 0)
 mesh = SubResource("SphereMesh_u6mvt")
 
 [node name="HealthBar" type="MeshInstance3D" parent="." unique_id=95406443]
@@ -151,6 +147,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64, 0)
 mesh = SubResource("QuadMesh_fyi4w")
 skeleton = NodePath("")
 
+[connection signal="animation_finished" from="Orc2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="EnemyArea3D" to="." method="_on_enemy_area_3d_body_entered"]
 [connection signal="area_entered" from="ChaseArea" to="." method="_on_chase_area_area_entered"]
 [connection signal="area_exited" from="ReleaseChaseArea" to="." method="_on_release_chase_area_area_exited"]

@@ -49,6 +49,8 @@ func _on_damage_taken():
 	
 	_update_life_display()
 
+func is_creature_dead() -> bool:
+	return health_component.health <= 0
 
 func _on_heal_taken() -> void:
 	#TODO: heal animation ?

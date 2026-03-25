@@ -8,6 +8,7 @@ var target: Creature
 var base_position: Vector3
 var is_attacking: bool = false
 var player_at_range: bool = false
+var randomanimation: RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var burn_effect: MeshInstance3D = $Effect
 var burn_shader_mat: ShaderMaterial
 
@@ -32,6 +33,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	
+	if (is_creature_dead()):
+		return
+	
 	if not base_position and not $Navigation/UpdateNavigation.is_stopped():
 		$Navigation/UpdateNavigation.stop() # while not base position, stop the computation
 	elif $Navigation/UpdateNavigation.is_stopped():
@@ -53,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		#base_position = null
 		velocity.y += prev_gravity  * delta * 4
 	
-	if (!$Orc2/AnimationPlayer.is_playing()):
+	if (!is_creature_dead() && !$Orc2/AnimationPlayer.is_playing()):
 		if (velocity.is_zero_approx()):
 			$Orc2/AnimationPlayer.play("Idle")
 		else:
@@ -88,14 +93,10 @@ func _damage_taken():
 
 func _death_sequence():
 	$Orc2/AnimationPlayer.play("Death")
-	await $Orc2/AnimationPlayer.animation_finished
-	super._death_sequence()
 
 
 func _death_sequence_summoned():
 	$Orc2/AnimationPlayer.play("Death")
-	await $Orc2/AnimationPlayer.animation_finished
-	super._death_sequence_summoned()
 
 func set_mob_data(human_seed: String, difficulty: int, depth_ratio: float) -> void:
 	super.set_mob_data(human_seed, difficulty, depth_ratio)
@@ -157,10 +158,30 @@ func _on_attack_area_area_exited(_area: Area3D) -> void:
 func try_attack() -> void:
 	if player_at_range and !is_attacking:
 		is_attacking = true
-		$Orc2/AnimationPlayer.play("Punch")
-		end_attack()
+		if (randomanimation.randf_range(0, 2) > 1):
+			$Orc2/AnimationPlayer.play("Punch")
+		else:
+			$Orc2/AnimationPlayer.play("Weapon")
+		
 
 func end_attack() -> void:
 	is_attacking = false
 	await get_tree().create_timer(0.3).timeout
 	try_attack()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	match anim_name:
+		"Death":
+			await get_tree().create_timer(0.5).timeout
+			$Orc2/AnimationPlayer.stop()
+			print("Ded")
+			super._death_sequence()
+		"Punch", "Weapon":
+			end_attack()
+		"HitReact":
+			pass
+		"Idle":
+			pass
+		"Run":
+			pass

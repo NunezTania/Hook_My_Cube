@@ -15,7 +15,7 @@ func _init(parent: Node3D) -> void:
 	
 	_set_rune()
 	
-	#cooldown = 2.5
+	cooldown = 1.0
 	#
 	#rune_resource.cooldown_reduction = 0.0
 	#rune_resource.projectile_perforation_count = 0
@@ -35,7 +35,7 @@ static func get_default_rune_data() -> Dictionary:
 		"type": Enums.DamageType.PLANT,
 		"cost_value": 50,
 		
-		"cooldown": 2.5,
+		"cooldown": 1.5,
 	
 		"cooldown_reduction": 0.0,
 		"p_perforation_count": 0,

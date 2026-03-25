@@ -6,7 +6,6 @@ const GOLD = preload("res://materials/gold.tres")
 
 func _ready() -> void:
 	super._ready()
-	mesh_instance_3d.mesh.material = GOLD
 
 
 func _on_area_3d_area_entered(_area: Area3D) -> void:

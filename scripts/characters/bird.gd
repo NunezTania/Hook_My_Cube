@@ -64,7 +64,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# TODO if too far from center (something like maze.size * CubeCustom.size * maze.scale_factor) reset position to spawner
-	
+	# Do nothing when creature is dead
+	if (is_creature_dead()):
+		return
 	#if id == 1:
 		#return
 		
@@ -231,8 +233,6 @@ func _on_damage_taken():
 	
 func _death_sequence():
 	$Pigeon2/AnimationPlayer.play("Death")
-	await $Pigeon2/AnimationPlayer.animation_finished
-	super._death_sequence()
 
 func _death_sequence_summoned():
 	$Pigeon2/AnimationPlayer.play("Death")
@@ -386,3 +386,15 @@ func _on_body_area_entered(area: Area3D) -> void:
 			creature.has_method("take_damage"):
 				creature.take_damage(damage, get_type(), armor_pen)
 				_apply_effect(creature)
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	match anim_name:
+		"Death":
+			await get_tree().create_timer(0.5).timeout
+			super._death_sequence()
+		"Punch", "Headbutt":
+			pass
+		"FlyingIdle":
+			pass
+		"FastFlying":
+			pass

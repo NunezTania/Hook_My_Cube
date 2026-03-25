@@ -2,7 +2,7 @@ extends Node
 
 class_name Rune
 
-var cooldown: float 
+var cooldown: float = 0.5
 # decorators attribute
 var rune_resource: RuneResource = RuneResource.new()
 

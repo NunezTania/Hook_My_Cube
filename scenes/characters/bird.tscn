@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fqro76tg5qme" path="res://scripts/characters/bird.gd" id="1_2sltb"]
 [ext_resource type="Material" uid="uid://cluaqb8rwmdm8" path="res://materials/shaders/bird_on_fire.tres" id="2_41i38"]
-[ext_resource type="PackedScene" uid="uid://duw1m5mrypjtg" path="res://texture/Ultimate Monsters/Flying/glTF/Pigeon.gltf" id="2_aoeho"]
+[ext_resource type="PackedScene" uid="uid://bi07vbymi66bd" path="res://texture/Ultimate Monsters/Flying/glTF/Pigeon.gltf" id="2_aoeho"]
 [ext_resource type="Material" uid="uid://dtrgxefu8yt4f" path="res://materials/creatures/bird_default.tres" id="2_dwjge"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="5_aoeho"]
 
@@ -82,7 +82,7 @@ script = ExtResource("1_2sltb")
 [node name="Pigeon2" parent="." unique_id=484457301 instance=ExtResource("2_aoeho")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Pigeon2/CharacterArmature" parent_id_path=PackedInt32Array(484457301, 1066055200) index="0" unique_id=373092133]
+[node name="Skeleton3D" parent="Pigeon2/CharacterArmature" parent_id_path=PackedInt32Array(484457301, 438791066) index="0" unique_id=539872532]
 bones/1/rotation = Quaternion(-0.014627182, -0.0009377924, 0.003287558, 0.99988717)
 bones/2/rotation = Quaternion(0.23638542, 0.00018450998, -0.0034135177, 0.97165334)
 bones/3/rotation = Quaternion(0.57166564, -0.0002264342, -0.00015693657, 0.82048666)
@@ -162,7 +162,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
 [node name="TypeVisualIndicator" type="MeshInstance3D" parent="." unique_id=1952437468]
-transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, -0.26, 1.57, 0)
+transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, 0, 0.54, 0)
 mesh = SubResource("SphereMesh_142vc")
 skeleton = NodePath("../Front")
 
@@ -189,6 +189,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56, 0)
 mesh = SubResource("QuadMesh_45abh")
 skeleton = NodePath("")
 
+[connection signal="animation_finished" from="Pigeon2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
 [connection signal="area_entered" from="CohesionVision" to="." method="_on_cohesion_vision_area_entered"]
 [connection signal="area_exited" from="CohesionVision" to="." method="_on_cohesion_vision_area_exited"]
