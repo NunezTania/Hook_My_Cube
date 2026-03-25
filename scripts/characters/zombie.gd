@@ -31,9 +31,14 @@ func _ready() -> void:
 	
 	damage_area = $MeshInstance3D
 
+func can_run():
+	match $Orc2/AnimationPlayer.current_animation:
+		"HitReact", "Punch", "Weapon":
+			return false
+		_:
+			return true
 
 func _physics_process(delta: float) -> void:
-	
 	if (is_creature_dead()):
 		return
 	
@@ -58,13 +63,13 @@ func _physics_process(delta: float) -> void:
 		#base_position = null
 		velocity.y += prev_gravity  * delta * 4
 	
-	if (!is_creature_dead() && !$Orc2/AnimationPlayer.is_playing()):
+	if (!is_creature_dead() && can_run()):
 		if (velocity.is_zero_approx()):
 			$Orc2/AnimationPlayer.play("Idle")
 		else:
 			$Orc2/AnimationPlayer.play("Run")
-	
-	move_and_slide()
+	if (can_run()):
+		move_and_slide()
 
 func _on_burn_effect():
 	#burn_effect.visible = true
