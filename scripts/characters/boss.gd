@@ -23,10 +23,10 @@ var bird: PackedScene = preload("res://scenes/characters/bird.tscn")
 func _ready() -> void:
 	health_bar = $HealthBar
 	super._ready()
-	
+
 	player = get_tree().get_first_node_in_group("Player")
-	
-	 # TODO: balance :
+
+	# TODO: balance :
 	health_component._max_health = 350
 	health_component.health = health_component._max_health
 	health_component._armor = 2.0
@@ -35,61 +35,62 @@ func _ready() -> void:
 	health_component.speed = health_component._max_speed
 	damage = 15
 	damage_type = Enums.DamageType.NORMAL # TODO: when water type is added: change this to water damage type
-	
+	$AnimationPlayer.play("idle")
+
 	attack_cd = 2.0
 	id = -1
 	damage_area = $"Sketchfab_Scene/Sketchfab_model/Collada visual scene group/Cube/defaultMaterial2"
-	
+
 	health_bar_max_ratio = 10.0
 
 
 func _on_burn_effect(): # TODO: better fire animation
 	pass
-	##print("burn_effect")
-	#default_material.set_surface_override_material(0, BOSS_ON_FIRE_1)
-	#shader_mat = default_material.get_surface_override_material(0)
-	#
-	#default_material_2.set_surface_override_material(0, BOSS_ON_FIRE_2)
-	#shader_mat_2 = default_material_2.get_surface_override_material(0)
-	#
-	#default_material_3.set_surface_override_material(0, BOSS_ON_FIRE_3)
-	#shader_mat_3 = default_material_3.get_surface_override_material(0)
-	#
-	#shader_mat.set_shader_parameter("shader_parameter/dissolveSlider", 0.0)
-	#shader_mat_2.set_shader_parameter("shader_parameter/dissolveSlider", 0.0)
-	#shader_mat_3.set_shader_parameter("shader_parameter/dissolveSlider", 0.0)
-	#
-	##shader_parameter/dissolveSlider
-	#var cd: float = StatusEffect.DEFAULT_COOLDOWN / 2
-	#var tween = get_tree().create_tween()
-	#tween.tween_property(shader_mat, "shader_parameter/dissolveSlider", 0.5, cd)
-	#tween.tween_property(shader_mat_2, "shader_parameter/dissolveSlider", 0.5, cd)
-	#tween.tween_property(shader_mat_3, "shader_parameter/dissolveSlider", 0.5, cd)
-	#
-	#var timer = get_tree().create_timer(cd)
-	#await timer.timeout
-	#
-	#default_material.set_surface_override_material(0, null)
-	#default_material_2.set_surface_override_material(0, null)
-	#default_material_3.set_surface_override_material(0, null)
-	#
-	
+##print("burn_effect")
+#default_material.set_surface_override_material(0, BOSS_ON_FIRE_1)
+#shader_mat = default_material.get_surface_override_material(0)
+#
+#default_material_2.set_surface_override_material(0, BOSS_ON_FIRE_2)
+#shader_mat_2 = default_material_2.get_surface_override_material(0)
+#
+#default_material_3.set_surface_override_material(0, BOSS_ON_FIRE_3)
+#shader_mat_3 = default_material_3.get_surface_override_material(0)
+#
+#shader_mat.set_shader_parameter("shader_parameter/dissolveSlider", 0.0)
+#shader_mat_2.set_shader_parameter("shader_parameter/dissolveSlider", 0.0)
+#shader_mat_3.set_shader_parameter("shader_parameter/dissolveSlider", 0.0)
+#
+##shader_parameter/dissolveSlider
+#var cd: float = StatusEffect.DEFAULT_COOLDOWN / 2
+#var tween = get_tree().create_tween()
+#tween.tween_property(shader_mat, "shader_parameter/dissolveSlider", 0.5, cd)
+#tween.tween_property(shader_mat_2, "shader_parameter/dissolveSlider", 0.5, cd)
+#tween.tween_property(shader_mat_3, "shader_parameter/dissolveSlider", 0.5, cd)
+#
+#var timer = get_tree().create_timer(cd)
+#await timer.timeout
+#
+#default_material.set_surface_override_material(0, null)
+#default_material_2.set_surface_override_material(0, null)
+#default_material_3.set_surface_override_material(0, null)
+#
+
 
 func apply_visual_burn_effect(duration: float) -> void:
 	burn_applied += 1
 	default_material.set_surface_override_material(0, BOSS_ON_FIRE_1)
 	shader_mat = default_material.get_surface_override_material(0)
-	
+
 	default_material_2.set_surface_override_material(0, BOSS_ON_FIRE_2)
 	shader_mat_2 = default_material_2.get_surface_override_material(0)
-	
+
 	default_material_3.set_surface_override_material(0, BOSS_ON_FIRE_3)
 	shader_mat_3 = default_material_3.get_surface_override_material(0)
-	
+
 	shader_mat.set_shader_parameter("dissolveSlider", 1.0)
 	shader_mat_2.set_shader_parameter("dissolveSlider", 1.0)
 	shader_mat_3.set_shader_parameter("dissolveSlider", 1.0)
-	
+
 	var timer = get_tree().create_timer(duration)
 	await timer.timeout
 	burn_applied -= 1
@@ -97,36 +98,36 @@ func apply_visual_burn_effect(duration: float) -> void:
 		default_material.set_surface_override_material(0, null)
 		default_material_2.set_surface_override_material(0, null)
 		default_material_3.set_surface_override_material(0, null)
-	
+
 
 func _physics_process(delta: float) -> void:
 	if can_rotate:
 		current_cd += delta
 		if is_attacking:
 			current_cd = 0.0
-		
+
 		if current_cd >= attack_cd:
 			is_attacking = true
 			current_cd = 0.0
 			attack_cd = randf_range(0.5, 3.0)
-			$MushroomKing2/AnimationPlayer.play("Weapon")
+			$AnimationPlayer.play("attack")
 			if randf() < 0.2:
 				_spawn_boid()
-		
+
 		var to_player = player.global_transform.origin - global_transform.origin
 		to_player.y = 0
 		to_player = to_player.normalized()
-		
+
 		var current_y = rotation.y
 		var desired_y = atan2(to_player.x, to_player.z)
 		var new_y = lerp_angle(current_y, desired_y, 0.1)
-		
+
 		rotation.y = new_y
 
 
 func _spawn_boid() -> void:
 	var max_spawn_radius = 10
-	
+
 	for i in range(5):
 		var new_bird = bird.instantiate()
 		new_bird.id = i
@@ -141,7 +142,7 @@ func _spawn_boid() -> void:
 func _attack_end() -> void:
 	can_rotate = true
 	is_attacking = false
-	$MushroomKing2/AnimationPlayer.play("Idle")
+	$AnimationPlayer.play("idle")
 
 func _attack_callibrate() -> void:
 	can_rotate = false
@@ -152,8 +153,8 @@ func _on_player_listener_area_entered(area: Area3D) -> void:
 	if area.get_parent().is_in_group("Player"):
 		var creature = (area.get_parent() as Creature)
 		if 	creature and creature.has_method("get_health_component") and \
-			creature.has_method("take_damage"):
-				creature.take_damage(damage, get_type(), armor_pen)
+		creature.has_method("take_damage"):
+			creature.take_damage(damage, get_type(), armor_pen)
 
 
 func _attack_touch_ground() -> void:
@@ -172,7 +173,10 @@ func _on_knock_back_area_area_entered(_area: Area3D) -> void:
 func _on_knock_back_area_area_exited(_area: Area3D) -> void:
 	on_knockback_area = false
 
+
 func _death_sequence() -> void:
-	$MushroomKing2/AnimationPlayer.play("Death")
-	await $MushroomKing2/AnimationPlayer.animation_finished
-	super._death_sequence()
+	# TODO: death animations
+
+	is_dead.emit(id) # notify the death (need an id to emit, but isn't used for bosses)
+
+	queue_free()
