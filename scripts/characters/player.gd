@@ -347,7 +347,7 @@ func _attack() -> void:
 		active_rune.heavy_attack(destination, rune_resource, attack_timer/2.0) # 2 second or more = biggest strongest attack
 	is_able_to_attack = false
 	var cd: float = active_rune.get_initial_cooldown() * (1.0 - min(rune_resource.cooldown_reduction, 0.5)) if not is_in_lobby else 0.1;
-	print("cds: ", active_rune.get_initial_cooldown(), " ", rune_resource.cooldown_reduction, " ", cd)
+	#print("cds: ", active_rune.get_initial_cooldown(), " ", rune_resource.cooldown_reduction, " ", cd)
 	var timer: SceneTreeTimer = get_tree().create_timer(cd)
 	timer.timeout.connect(
 		func ():
