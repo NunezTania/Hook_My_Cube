@@ -2,7 +2,7 @@ extends Enemy
 
 class_name Zombie
 
-const SPEED:float = 3.0
+const SPEED:float = 2.0
 @onready var navigation_agent_3d: NavigationAgent3D = $Navigation/NavigationAgent3D
 var target: Creature
 var base_position: Vector3
@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func can_run():
 	match $Orc2/AnimationPlayer.current_animation:
-		"HitReact", "Punch", "Weapon":
+		"HitReact", "Punch", "Weapon", "Jump_Land", "Jump_Idle":
 			return false
 		_:
 			return true
@@ -63,12 +63,15 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta * 4
 		#base_position = null
 		velocity.y += prev_gravity  * delta * 4
+		$Orc2/AnimationPlayer.play("Jump_Idle")
+		move_and_slide()
 	
-	if (!is_creature_dead() && can_run()):
+	elif (!is_creature_dead() && can_run()):
 		if (velocity.is_zero_approx()):
 			$Orc2/AnimationPlayer.play("Idle")
 		else:
 			$Orc2/AnimationPlayer.play("Run")
+			
 	if (can_run()):
 		move_and_slide()
 
@@ -181,10 +184,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"Death":
 			await get_tree().create_timer(0.5).timeout
 			$Orc2/AnimationPlayer.stop()
-			print("Ded")
 			super._death_sequence()
 		"Punch", "Weapon":
 			end_attack()
+		"Jump_Idle":
+			if (is_on_floor()):
+				$Orc2/AnimationPlayer.play("Jump_Land", -1, 0.9)
 		"HitReact":
 			pass
 		"Idle":

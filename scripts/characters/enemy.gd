@@ -73,7 +73,6 @@ func set_mob_data(human_seed: String, difficulty: int, depth_ratio: float) -> vo
 	else:
 		armor_pen = lvl / 10.0 # [0.2; 1] ... [1.0; 5.0]
 
-
 func _death_sequence() -> void:
 	var xp_orbe = XP_ORBE.instantiate()
 	xp_orbe.set_amount(xp)

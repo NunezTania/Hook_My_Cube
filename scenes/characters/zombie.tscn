@@ -10,11 +10,11 @@ margin = 0.0
 radius = 0.685
 height = 3.115
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uql5s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c44uy"]
 albedo_color = Color(0.121569, 0.564706, 0.188235, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_j7qbc"]
-material = SubResource("StandardMaterial3D_uql5s")
+material = SubResource("StandardMaterial3D_c44uy")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f2e6v"]
 radius = 0.515
@@ -61,7 +61,7 @@ bones/2/rotation = Quaternion(-3.5526934e-15, 1.1920933e-07, -8.470341e-22, 1)
 bones/4/rotation = Quaternion(0.16683151, 4.3189968e-07, 1.0312022e-07, 0.9859854)
 bones/5/rotation = Quaternion(0.096189596, -8.284732e-07, 2.1512088e-08, 0.99536306)
 bones/6/rotation = Quaternion(0.35192487, 9.693933e-07, 1.5025624e-07, 0.93602824)
-bones/7/rotation = Quaternion(-0.39071867, -0.00025390706, 0.0001072016, 0.9205101)
+bones/7/rotation = Quaternion(-0.39071867, -0.00025390703, 0.00010720161, 0.9205101)
 bones/8/rotation = Quaternion(-0.13449623, -0.032737724, -0.40912706, 0.90191686)
 bones/9/rotation = Quaternion(0.4946222, 0.5018446, 0.5071979, -0.496237)
 bones/10/rotation = Quaternion(0.014786743, 0.26712272, -0.17426825, 0.94765896)
