@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwm3bngj0v645"]
+[gd_scene format=3 uid="uid://dwm3bngj0v645"]
 
 [ext_resource type="Script" uid="uid://bd2njdqs7iukh" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://yg54ndamnalc" path="res://scenes/decorations/main_menu.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://da6ne6ua6jw8v" path="res://scenes/decorations/new_game_menu.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cnbwwgrhxy85i" path="res://scenes/decorations/continue_menu.tscn" id="4_tbgi4"]
+[ext_resource type="AudioStream" uid="uid://cji5uwg6nla2x" path="res://audio/hard_dungeon_bpm140.mp3" id="5_tbgi4"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1625132605]
 script = ExtResource("1_o5qli")
 
-[node name="MainMenu" parent="." instance=ExtResource("2_0wfyh")]
+[node name="MainMenu" parent="." unique_id=924994562 instance=ExtResource("2_0wfyh")]
 
-[node name="NewGameMenu" parent="." instance=ExtResource("3_jyhfs")]
+[node name="NewGameMenu" parent="." unique_id=1881895164 instance=ExtResource("3_jyhfs")]
 visible = false
 
-[node name="ContinueMenu" parent="." instance=ExtResource("4_tbgi4")]
+[node name="ContinueMenu" parent="." unique_id=1562262873 instance=ExtResource("4_tbgi4")]
 visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=34830130]
+stream = ExtResource("5_tbgi4")
+autoplay = true

@@ -363,6 +363,7 @@ func _on_avoidance_vision_area_exited(area: Area3D) -> void:
 
 
 func _on_player_detection_area_entered(area: Area3D) -> void:
+	$PlayerDetection/AudioStreamPlayer3D.play()
 	if spawner: spawner.player_detected(area.get_parent(), id)
 
 

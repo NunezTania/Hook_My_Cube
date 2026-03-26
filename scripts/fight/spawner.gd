@@ -12,7 +12,10 @@ var debug_id: int = -1
 
 var possible_mobs: Array[PackedScene] = [
 	preload("res://scenes/characters/zombie.tscn"),
-	preload("res://scenes/characters/bird.tscn")
+	preload("res://scenes/characters/bird.tscn"),
+	# New mob but not finished yet
+	#preload("res://scenes/characters/kamikaze.tscn"),
+	
 ]
 var potential_boids_id: Array[int] = []
 var current_mobs: Array

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cla26sao8dhjw"]
+[gd_scene format=3 uid="uid://cla26sao8dhjw"]
 
 [ext_resource type="Script" uid="uid://d0qm8855yl4cu" path="res://scripts/maze.gd" id="1_ol5qi"]
 [ext_resource type="PackedScene" uid="uid://y1yw5naea0tu" path="res://scenes/characters/player.tscn" id="2_fgl6e"]
+[ext_resource type="AudioStream" uid="uid://3avmxta7awf8" path="res://audio/insidious_caven.mp3" id="3_l3biw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fgl6e"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,17 +19,22 @@ tonemap_mode = 2
 [sub_resource type="NavigationMesh" id="NavigationMesh_fgl6e"]
 agent_height = 2.0
 
-[node name="Maze" type="Node3D"]
+[node name="Maze" type="Node3D" unique_id=36742146]
 script = ExtResource("1_ol5qi")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2011226334]
 environment = SubResource("Environment_vqf1n")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1726579870]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("2_fgl6e")]
+[node name="Player" parent="." unique_id=1324959594 instance=ExtResource("2_fgl6e")]
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1793611887]
 navigation_mesh = SubResource("NavigationMesh_fgl6e")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=278485507]
+stream = ExtResource("3_l3biw")
+volume_db = -14.0
+autoplay = true

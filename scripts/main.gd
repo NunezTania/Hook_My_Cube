@@ -7,7 +7,6 @@ var maze_scene: PackedScene = preload("res://scenes/maze.tscn")
 func _ready() -> void:
 	$MainMenu.new_game.connect(_new_game_menu)
 	$MainMenu.continue_game.connect(_continue_game_menu)
-	
 	$NewGameMenu.new_game.connect(_start_new_game)
 	$NewGameMenu.return_to_main_menu.connect(_return_to_main_menu)
 	$ContinueMenu.continue_game.connect(_continue_game)

@@ -4,6 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://b51mirwwf7n3f" path="res://texture/Ultimate Monsters/Big/glTF/Orc.gltf" id="2_c44uy"]
 [ext_resource type="Material" uid="uid://pcviwwdbpg5g" path="res://materials/shaders/zombie_on_fire.tres" id="2_u6mvt"]
 [ext_resource type="Material" uid="uid://dc0wnhgk2gfc4" path="res://materials/creatures/health_bar_color.tres" id="4_c44uy"]
+[ext_resource type="AudioStream" uid="uid://yjfi0k6v7vo4" path="res://audio/zombie/tribe_e.wav" id="5_nyj8v"]
+[ext_resource type="AudioStream" uid="uid://dpscj42vswlci" path="res://audio/zombie/tribe_f.wav" id="6_fmsyv"]
+[ext_resource type="AudioStream" uid="uid://bj00hx6ro00hi" path="res://audio/zombie/tribe_g.wav" id="7_v7sug"]
+[ext_resource type="AudioStream" uid="uid://du7sh4n5cpsko" path="res://audio/zombie/death1.mp3" id="8_okyx6"]
+[ext_resource type="AudioStream" uid="uid://bbb1v11qdp826" path="res://audio/zombie/death2.mp3" id="9_ejpty"]
+[ext_resource type="AudioStream" uid="uid://byg0axruvlwg4" path="res://audio/zombie/death3.mp3" id="10_5lhr6"]
+[ext_resource type="AudioStream" uid="uid://c5d7uo0jdtkb2" path="res://audio/zombie/death4.mp3" id="11_ejpty"]
+[ext_resource type="AudioStream" uid="uid://b0dmi25svb5wf" path="res://audio/zombie/damage_taken.mp3" id="12_0ntnw"]
+[ext_resource type="AudioStream" uid="uid://edo81u65rnrf" path="res://audio/zombie/damage_taken2.mp3" id="13_ia0el"]
+[ext_resource type="AudioStream" uid="uid://cgm3gf5r4yqmj" path="res://audio/zombie/damage_taken3.mp3" id="14_st5op"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fulqv"]
 margin = 0.0
@@ -23,6 +33,12 @@ height = 1.815
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fulqv"]
 height = 4.37866
 radius = 25.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_okyx6"]
+streams_count = 3
+stream_0/stream = ExtResource("5_nyj8v")
+stream_1/stream = ExtResource("6_fmsyv")
+stream_2/stream = ExtResource("7_v7sug")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f2e6v"]
 height = 5.88086
@@ -46,6 +62,20 @@ height = 0.2
 resource_local_to_scene = true
 material = ExtResource("4_c44uy")
 size = Vector2(1, 0.15)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nyj8v"]
+streams_count = 4
+stream_0/stream = ExtResource("8_okyx6")
+stream_1/stream = ExtResource("9_ejpty")
+stream_2/stream = ExtResource("10_5lhr6")
+stream_3/stream = ExtResource("11_ejpty")
+stream_3/weight = 1.5
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ls2y3"]
+streams_count = 3
+stream_0/stream = ExtResource("12_0ntnw")
+stream_1/stream = ExtResource("13_ia0el")
+stream_2/stream = ExtResource("14_st5op")
 
 [node name="Zombie" type="CharacterBody3D" unique_id=1844657525]
 collision_layer = 0
@@ -117,6 +147,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18933, 0)
 shape = SubResource("CylinderShape3D_fulqv")
 debug_color = Color(0.811437, 0.406932, 0.149797, 0.42)
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ChaseArea" unique_id=749746051]
+stream = SubResource("AudioStreamRandomizer_okyx6")
+max_distance = 500.0
+
 [node name="ReleaseChaseArea" type="Area3D" parent="." unique_id=1172526519]
 collision_layer = 0
 collision_mask = 2
@@ -146,6 +180,14 @@ mesh = SubResource("SphereMesh_u6mvt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64, 0)
 mesh = SubResource("QuadMesh_fyi4w")
 skeleton = NodePath("")
+
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="." unique_id=1684610490]
+stream = SubResource("AudioStreamRandomizer_nyj8v")
+max_distance = 500.0
+
+[node name="DamageAudio" type="AudioStreamPlayer3D" parent="." unique_id=850223385]
+stream = SubResource("AudioStreamRandomizer_ls2y3")
+max_distance = 500.0
 
 [connection signal="animation_finished" from="Orc2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="EnemyArea3D" to="." method="_on_enemy_area_3d_body_entered"]

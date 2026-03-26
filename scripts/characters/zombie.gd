@@ -97,10 +97,13 @@ func apply_visual_burn_effect(duration: float) -> void:
 		burn_effect.visible = false
 
 func _damage_taken():
+	if(health_component.health > 0):
+		$DamageAudio.play()
 	$Orc2/AnimationPlayer.play("HitReact")
 	super._damage_taken()
 
 func _death_sequence():
+	$DeathAudio.play()
 	$Orc2/AnimationPlayer.play("Death")
 
 
@@ -146,6 +149,7 @@ func _on_enemy_area_3d_body_entered(_body: Node3D) -> void:
 
 func _on_chase_area_area_entered(area: Area3D) -> void:
 	#print("_on_chase_area_area_entered")
+	$ChaseArea/AudioStreamPlayer3D.play()
 	target = area.get_parent()
 
 
@@ -182,7 +186,7 @@ func end_attack() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"Death":
-			await get_tree().create_timer(0.5).timeout
+			await $DeathAudio.finished
 			$Orc2/AnimationPlayer.stop()
 			super._death_sequence()
 		"Punch", "Weapon":
