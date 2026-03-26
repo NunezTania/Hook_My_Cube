@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://df7a0bpn232qa"]
+[gd_scene format=3 uid="uid://df7a0bpn232qa"]
 
 [ext_resource type="Script" uid="uid://cnsb7r4c3j1ea" path="res://scripts/fight/projectiles/plant_projectile.gd" id="1_u3xbx"]
 [ext_resource type="Material" uid="uid://bn1sb3js08j0l" path="res://materials/projectiles/plant_projectile.tres" id="2_del8d"]
@@ -13,24 +13,24 @@ material = ExtResource("2_del8d")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_etk1w"]
 
-[node name="PlantProjectile" type="RigidBody3D"]
+[node name="PlantProjectile" type="RigidBody3D" unique_id=1405335919]
 collision_layer = 8
 physics_material_override = SubResource("PhysicsMaterial_del8d")
 gravity_scale = 0.4
 script = ExtResource("1_u3xbx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=795546614]
 shape = SubResource("SphereShape3D_pmbl8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=894834980]
 mesh = SubResource("SphereMesh_wih37")
 
-[node name="InteractionArea" type="Area3D" parent="."]
+[node name="InteractionArea" type="Area3D" parent="." unique_id=1944416505]
 collision_layer = 8
 collision_mask = 7
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=217051668]
 shape = SubResource("SphereShape3D_etk1w")
 debug_color = Color(0.733333, 0.462745, 0.227451, 0.419608)
 
-[node name="TimeToLive" type="Timer" parent="."]
+[node name="TimeToLive" type="Timer" parent="." unique_id=306281157]

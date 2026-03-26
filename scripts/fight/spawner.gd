@@ -3,7 +3,7 @@ extends Node3D
 class_name Spawner
 
 var id: int 
-static var NBR_MOB_BY_SPAWNER: int = 5
+static var NBR_MOB_BY_SPAWNER: int = 10
 var mob_dead: Array[int] = []
 var maze: Maze
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()

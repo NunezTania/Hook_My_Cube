@@ -228,16 +228,17 @@ func remove_creature_to_listen(old_target: Creature) -> void:
 		old_target.health_component.damage_taken.disconnect(potential_target_take_damage)
 
 func _on_damage_taken():
+	$DamageAudio.play()
 	$Pigeon2/AnimationPlayer.play("HitReact")
 	super._on_damage_taken()
 	
 func _death_sequence():
+	$DeathAudio.play()
 	$Pigeon2/AnimationPlayer.play("Death")
 
 func _death_sequence_summoned():
+	$DeathAudio.play()
 	$Pigeon2/AnimationPlayer.play("Death")
-	await $Pigeon2/AnimationPlayer.animation_finished
-	super._death_sequence_summoned()
 
 func _compute_new_target_position(i: int, max_i: int) -> Vector3:
 	var angle: float = 3*PI / max_i
@@ -391,7 +392,8 @@ func _on_body_area_entered(area: Area3D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"Death":
-			await get_tree().create_timer(0.5).timeout
+			await $DeathAudio.finished
+			await get_tree().create_timer(0.2).timeout
 			super._death_sequence()
 		"Punch", "Headbutt":
 			pass

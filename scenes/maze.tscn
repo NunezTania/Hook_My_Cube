@@ -36,5 +36,4 @@ navigation_mesh = SubResource("NavigationMesh_fgl6e")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=278485507]
 stream = ExtResource("3_l3biw")
-volume_db = -14.0
 autoplay = true

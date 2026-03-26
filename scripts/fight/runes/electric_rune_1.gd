@@ -15,7 +15,7 @@ func _init(parent: Node3D) -> void:
 	
 	_set_rune()
 	
-	cooldown = 0.25
+	cooldown = 0.2
 	#
 	#rune_resource.cooldown_reduction = 0.0
 	#rune_resource.projectile_perforation_count = 1

@@ -40,40 +40,36 @@ func can_run():
 
 func _physics_process(delta: float) -> void:
 	
-	if (is_creature_dead()):
-		return
-	
-	if not base_position and not $Navigation/UpdateNavigation.is_stopped():
-		$Navigation/UpdateNavigation.stop() # while not base position, stop the computation
-	elif $Navigation/UpdateNavigation.is_stopped():
-		$Navigation/UpdateNavigation.start()
-	
-	var prev_gravity = velocity.y
-	
-	var direction = Vector3()
-	if target or not navigation_agent_3d.is_navigation_finished():
-		direction = (navigation_agent_3d.get_next_path_position() - global_position).normalized()
-	velocity = velocity.lerp(direction * health_component.speed, delta * 10)
-	
-	if player_at_range:
-		velocity = Vector3()
+	if (!is_creature_dead()):
+		if not base_position and not $Navigation/UpdateNavigation.is_stopped():
+			$Navigation/UpdateNavigation.stop() # while not base position, stop the computation
+		elif $Navigation/UpdateNavigation.is_stopped():
+			$Navigation/UpdateNavigation.start()
 		
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta * 4
-		#base_position = null
-		velocity.y += prev_gravity  * delta * 4
-		$Orc2/AnimationPlayer.play("Jump_Idle")
-		move_and_slide()
-	
-	elif (!is_creature_dead() && can_run()):
-		if (velocity.is_zero_approx()):
-			$Orc2/AnimationPlayer.play("Idle")
-		else:
-			$Orc2/AnimationPlayer.play("Run")
+		var prev_gravity = velocity.y
+		
+		var direction = Vector3()
+		if target or not navigation_agent_3d.is_navigation_finished():
+			direction = (navigation_agent_3d.get_next_path_position() - global_position).normalized()
+		velocity = velocity.lerp(direction * health_component.speed, delta * 10)
+		
+		if player_at_range:
+			velocity = Vector3()
 			
-	if (can_run()):
-		move_and_slide()
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * delta * 4
+			#base_position = null
+			velocity.y += prev_gravity  * delta * 4
+			$Orc2/AnimationPlayer.play("Jump_Idle")
+			move_and_slide()
+		
+		elif (can_run()):
+			if (velocity.is_zero_approx()):
+				$Orc2/AnimationPlayer.play("Idle")
+			else:
+				$Orc2/AnimationPlayer.play("Run")
+			move_and_slide()
 
 func _on_burn_effect():
 	#burn_effect.visible = true
@@ -103,11 +99,13 @@ func _damage_taken():
 	super._damage_taken()
 
 func _death_sequence():
+	$Navigation/UpdateNavigation.stop()
 	$DeathAudio.play()
 	$Orc2/AnimationPlayer.play("Death")
 
 
 func _death_sequence_summoned():
+	$Navigation/UpdateNavigation.stop()
 	$Orc2/AnimationPlayer.play("Death")
 
 func set_mob_data(human_seed: String, difficulty: int, depth_ratio: float) -> void:
@@ -169,7 +167,7 @@ func _on_attack_area_area_exited(_area: Area3D) -> void:
 
 
 func try_attack() -> void:
-	if player_at_range and !is_attacking:
+	if player_at_range and !is_attacking and !is_creature_dead():
 		is_attacking = true
 		if (randomanimation.randf_range(0, 2) > 1):
 			$Orc2/AnimationPlayer.play("Punch")
@@ -187,7 +185,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"Death":
 			await $DeathAudio.finished
-			$Orc2/AnimationPlayer.stop()
 			super._death_sequence()
 		"Punch", "Weapon":
 			end_attack()
@@ -199,4 +196,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"Idle":
 			pass
 		"Run":
+			pass
+		"Jump_Land":
 			pass

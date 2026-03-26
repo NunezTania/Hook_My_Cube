@@ -366,6 +366,7 @@ func _attack() -> void:
 
 func _on_damage_taken():
 	super._on_damage_taken()
+	$Head/DamageIndicator/ColorRect/AnimationPlayer.play("damage_taken")
 	$CanvasLayer/UI.damage_tick()
 
 func _update_life_display():
